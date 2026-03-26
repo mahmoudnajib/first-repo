@@ -1,9 +1,0 @@
-=> const {body, validationResult} = require('express-validator');
-    //  لاحظ ان السطر ده هو تمثيل لفكرة الـ destructing
-
-=> app.use(express.json()); // 3- Body parser - translator 
-                            // read the body got from browser as json file
-
-=> const course_id = +req.params.id; // params: points to the dynamic parts in the endpoint only so it is "id"
-                                        // '+' number يعني رجعلي اللي جاي
-

@@ -141,3 +141,8 @@ vite.config.ts.timestamp-*
 # My Custom Uploads
 uploads/*
 !uploads/.gitkeep
+
+# Local Learning & Project Drafts
+Notes/
+projectBeforeEditing/
+projectExplaination/
