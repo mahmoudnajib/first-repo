@@ -1,0 +1,64 @@
+// libuv library & thread pool
+
+- libuv => Single علي الرغم انه multi-threaded انه يشتغل node مكتبة بتمكن 
+- Thread pool handles file i/o
+
+// Thread pool handles time consuming operations which is asynchronous operands
+    => Node sends to Event viewer that sends the task to the thread pool that handles it 
+
+- its Size is 4 by default (handles 4 operands at the same time) and it can be
+    increased to 1024 (maximum).
+
+- ايه الفائدة؟ 
+    when executing 3 same operands (sync) let us assume execution time of the first is 40ms
+    then the second is 80 then the third is 120 and so on,
+    with thread pool all the three are executed in 40ms.
+
+- ازاي بيشتغلوا مع بعض؟
+ - main thread, libuv and thread pool communicate باختصار ازاي الـ 
+ - when seeing a time-consuming thing, main thread sends to libuv that sends to thread pool.
+
+// libuv & OS kernals 
+    => os handles the network tasks but not the file i/o
+    => windows kernal = iocp (input output completion ports)
+    => network tasks كل نظام تشغيل ليه كيرنال خاص بيه وهو اللي بيهندل الـ
+
+
+// كيف تسير العمليات في الكواليس؟
+    => Stack, queue, Web Api and Event loop القصة اللي فيها 4 ابطال 
+     ليها ترتيب في التنفيذ asynchronous نفس القصة اتشرحت تاني بزيادة بسيطة ان العمليات الـ 
+     حتي وان كنت كاتبها فانكشن قبل التانية في الكود هتلاقي ان التانية وارد جدا بتطلع الاول في الكونسول
+     asynchronous functions executed with an order
+    => Timers are the first being executed (حتي لو مكتوب في اخر الكود)
+    - * Event loop diagram محتاجين نعرف اكتر شوية عن الـ 
+
+
+// Http server
+    => we have the client side and the server side, client sends request server recieves and proccess it
+       we call that operation http protocol (Hyper text transfer protocol)
+
+
+
+
+// node js has a built-in server
+
+console.clear();
+const http = require('http');
+
+const server = http.createServer((req, res)=>{
+    console.log(`Request`, req.url); // فتحت المسار
+
+    if (req.url === '/'){
+        res.end("home page");
+    } 
+    else if (req.url === '/about') {
+        res.end("About page");
+    } 
+    else{
+        res.end("Not Found");
+    }
+})
+
+server.listen(5000, ()=>{ // اشبه ببوابة دخول port 5000 علي الـ http req استلم الـ 
+    console.log("Listening on port 5000");
+})

@@ -1,0 +1,82 @@
+- http server
+    - create and write
+const http = require('http');
+
+const server = http.createServer((req, res)=>{
+    res.write(`<h1>Ana fe elbayezzz mennnno</h1>`); // write in the html page
+    res.end();
+})
+
+server.listen(5000, 'localhost', ()=>{      // create server
+    console.log(`listening on port 5000`);
+})
+
+    
+
+- definition of routing system
+    => معينة Handler functions بـ Endpoints الية ربط الـ 
+        user writes /about => thats an endpoint (url), we have a handler function for this request should lead him to the about page 
+        this process is Routing
+        Routing system هو نظام توجيه الطلبات
+
+- HTTPS 
+    => hypertext transfer protocol secure => السيرفر المستخدم في التصفح الامن
+    => its port is 443
+    => port means the gate server recieves the client req
+
+- Http respones status code
+    => بيكون لكل ريسبونس كود معين زي مثلا 404
+    => status codes are 5 sections
+        server error, client error, successful respones,...
+
+
+- Remote address 
+    => لو كتبته هيوديك علي الموقع ip الـ
+
+
+- Web framework عشان بنضطر نهندل كل حاجه بايدنا عملنا الـ
+
+
+// Express
+- دلوقتي بقينا نهندل كا حاجه لوحدها بطريقة منظمة اكثر
+    => app.get()
+    => Express نظرة سطحية عن 
+
+
+// middleware
+    => function has access to req and res objects, يتم تنفيذها بعد استلام الريكويست وقبل ارسال الريسبوند
+    => a custom logic, maybe for authentication or something else has a relationship with req or res 
+
+
+// programm
+
+const exp = require('express');
+const app = exp();
+
+app.use((req, res, next)=>{ // middleware
+    console.log(`req method => ${req.method}, req url ${req.url}`);
+    next(); // after execution go to next
+})
+
+app.get('/', (req, res)=>{
+    res.send(`My first express program`);
+})
+
+app.get('/about', (req, res)=>{
+    res.send(`About page is heree!`);
+})
+
+app.listen('5000', ()=>{
+    console.log(`listening on port 5000`);
+})
+
+
+- morgan
+    => جاهزة middleware مكتبة 
+    => show us the method (get,...), route ('/...'), status (404,..) and the time period
+
+- example
+app.use(morgan('dev'));
+
+result => GET /about 304 1.834 ms - -
+

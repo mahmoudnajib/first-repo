@@ -1,0 +1,80 @@
+1- File System 
+
+    Blocking vs non-blocking code >>>
+
+    1- blocking => when javascripting operation waits until a non-js operation completes
+        => whole thing stops
+        => when seeing "Sync" name its probably a blocking code
+        => example ==> readFileSync
+
+    2- non-blocking => let the code above and beneath executed then iam executed
+
+
+// Practical
+// example, read file 
+
+// method 1 => (sync)
+const content = fs.readFileSync('D:\\data\\node\\node\\file.txt', 'utf8');
+console.log("Content =>", content);
+
+// method 2 => (Async)
+fs.readFile('node\\file.txt', 'utf8', (err, data) =>{
+
+    if (err)
+        console.log("Error reading file", err);
+    else 
+        console.log("Data =>", data);
+
+})
+
+---------------
+// Create and write to a file
+fs.writeFile('node\\file.json', JSON.stringify([{id: 1, name: "ahmed"}]), 'utf8', (err, data) =>{
+
+    if (err) console.log("Error writing file", err);
+    else console.log("Done writing"); 
+
+})
+
+
+// delete file
+fs.unlink('node\\file.json', (err) =>{
+    if (err) console.log(`Error caught while deleting file`, err);
+
+});
+
+
+// Buffer and utf8
+- هو مكان في الميموري لتخزين هذه البيانات Buffer هي طريقة ترميز الحروف في الملفات الي بيناري 0 و 1 والـ  utf8 
+- Streams ان لا يستطيع التعامل مع الملفات الضخمة لذلك نستعمل الـ  Buffer عيب الـ 
+
+
+// Streams ==> Divide files into chunks (64KB)
+- في يوتيوب بتلاحظ ان الفيديو بيعد معاك وليكن 30 ثانية بعد النقطة اللي انت واقف عندها هي دي الستريم
+احنا ملفنا كبير فمش هننقراه كله مرة واحدة لكن هنقطعه
+
+
+console.clear();
+const fs = require('fs');
+
+const rstream = fs.createReadStream('node\\file.txt', 'utf8'); // read
+const wstream = fs.createWriteStream('node\\str.txt', 'utf8'); // create and write
+
+rstream.on('data', chunk =>{ 
+    wstream.write("\n <====chunk====> \n");
+    wstream.write(chunk);
+})    
+
+
+
+// Npm اشتغلنا بيه شوية 
+- lodash and nodemon 
+- nodemon وكتبنا سكريبت في 
+
+
+// Cli tool
+- بنحاول نعمل اداة نتحكم فيها عن طريق التيرمينال 
+- عملنا مثال add course and price 
+- inquirer يسالنا فحملنا مكتبة terminal عايزين الـ 
+- executable هنخليها npm عملنا الاداة وعايزين نرفعها لل 
+- Done ✅

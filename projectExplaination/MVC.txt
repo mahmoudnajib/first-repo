@@ -1,0 +1,23 @@
+MVC => Model, View, Controller
+    => controller gets the req from route, takes what matter to him from the endpoint like the id,
+        tells model search for this id in database,
+        model fetch the data from database then send it to the controller, then its Viewed.
+
+1. Model
+    => the kitchen,logic and Data, has the recipe and the ingrediants, has the access to database
+    => Data schema تحديد شكل البيانات - الـ 
+
+2. Controller:  
+    => Handlers حطينا فيه كل الـ 
+    => All Api(s) in here
+    => recieve req, talk to model to get the data then return a response to the user
+
+3. Routes
+    => has all routes
+
+ ->>> بعد تقسيم المشروع
+        => Controller should have APIs (delete handlers from routes and write it into the controller),
+            export these new functions (old were handlers)
+        => Routes after deleting handlers we write the exported functions from controller, write every function in its
+            suitable routing place
+    
